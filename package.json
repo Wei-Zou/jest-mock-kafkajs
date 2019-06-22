@@ -1,0 +1,25 @@
+{
+  "name": "jest-mock-kafkajs",
+  "version": "1.0.0",
+  "description": "Mock kafkajs using jest manual mock",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wei-Zou/jest-mock-kafkajs.git"
+  },
+  "author": "Wei Zou",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Wei-Zou/jest-mock-kafkajs/issues"
+  },
+  "homepage": "https://github.com/Wei-Zou/jest-mock-kafkajs#readme",
+  "dependencies": {
+    "kafkajs": "1.8.0"
+  },
+  "devDependencies": {
+    "jest": "24.8.0"
+  }
+}
