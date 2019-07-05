@@ -1,11 +1,12 @@
 'use strict';
 
+const { Kafka } = require.requireActual('kafkajs');
 const KafkaConnection = require('../src/kafka-connection');
 const { initConfig, topic, groupId } = require('../src/config');
 
-describe('test KafkaConnection', () => {
+describe('test KafkaConnection with the actual kafkajs module', () => {
   test('should produce and consume successfully', async (done) => {
-    const kafkaConnection = new KafkaConnection(initConfig);
+    const kafkaConnection = new KafkaConnection(initConfig, Kafka);
     const key = 'key1';
     const value = 'value1';
 

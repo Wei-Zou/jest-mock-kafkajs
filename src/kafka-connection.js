@@ -1,10 +1,10 @@
 'use strict';
 
-const { Kafka } =  require('kafkajs');
+const { Kafka } = require('kafkajs');
 
 module.exports = class KafkaConnection {
-  constructor (config) {
-    this.connection = new Kafka(config);
+  constructor (config, KafkaModule = Kafka) {
+    this.connection = new KafkaModule(config);
     this.producer = null;
     this.consumer = null;
   }
