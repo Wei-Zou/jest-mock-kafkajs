@@ -1,12 +1,12 @@
 # jest-mock-kafkajs
-Mock `kafkajs` using Jest `manual mock`
+Mock `kafkajs` using Jest `manual mock`.
 The purpose of this project is to run unit tests against a `kafkajs` module mocked by Jest's `manual mock`. It also compares with running unit tests against the actual `kafkajs` module which requires a Kafka instance running (locally or remotely).
 
 ### env setup
 
 #### node.js
 This project is tested in node.js v10.15.0 version.
-run
+In the root directory, run
 ```
 npm i
 ```
