@@ -3,8 +3,8 @@
 const { Kafka } = require('kafkajs');
 
 module.exports = class KafkaConnection {
-  constructor(config, KafkaModule = Kafka) {
-    this.connection = new KafkaModule(config);
+  constructor(config) {
+    this.connection = new Kafka(config);
     this.producer = null;
     this.consumer = null;
   }
