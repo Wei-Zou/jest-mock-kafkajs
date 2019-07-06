@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npm run setup-local-env && jest",
     "test-actual": "npm run setup-local-env && jest ./test/kafka-connection-actual.spec.js",
-    "test-mocked": "npm run setup-local-env && jest ./test/kafka-connection-mock.spec.js",
+    "test-mocked": "jest ./test/kafka-connection-mock.spec.js",
     "setup-local-env": "docker-compose run --rm start_dependencies"
   },
   "repository": {
