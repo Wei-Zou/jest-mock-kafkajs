@@ -3,19 +3,19 @@
 const { Kafka } = require('kafkajs');
 
 module.exports = class KafkaConnection {
-  constructor (config, KafkaModule = Kafka) {
+  constructor(config, KafkaModule = Kafka) {
     this.connection = new KafkaModule(config);
     this.producer = null;
     this.consumer = null;
   }
 
-  async sendMessage (msgObj) {
+  async sendMessage(msgObj) {
     this.producer = this.producer || this.connection.producer();
     await this.producer.connect();
     await this.producer.send(msgObj);
   }
 
-  async setupSubscription ({ groupId, topic, onEachMessage }) {
+  async setupSubscription({ groupId, topic, onEachMessage }) {
     if (this.consumer) {
       await this.consumer.disconnect();
     }
@@ -27,8 +27,8 @@ module.exports = class KafkaConnection {
     });
   }
 
-  async disconnect () {
-    this.producer && await this.producer.disconnect();
-    this.consumer && await this.consumer.disconnect();
+  async disconnect() {
+    this.producer && (await this.producer.disconnect());
+    this.consumer && (await this.consumer.disconnect());
   }
 };

@@ -13,14 +13,18 @@ const onEachMessage = ({ message }) => {
   });
 };
 
-await kafkaConnection.setupSubscription({ groupId, topic, onEachMessage });
+const start = async () => {
+  await kafkaConnection.setupSubscription({ groupId, topic, onEachMessage });
 
-await kafkaConnection.sendMessage({
-  topic,
-  messages: [
-    {
-      key: 'key1',
-      value: 'value1',
-    },
-  ],
-});
+  await kafkaConnection.sendMessage({
+    topic,
+    messages: [
+      {
+        key: 'key1',
+        value: 'value1',
+      },
+    ],
+  });
+};
+
+start();
