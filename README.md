@@ -25,3 +25,14 @@ npm run test-actual
 ```
 npm run test-mocked
 ```
+
+### Compare testing against actual Kafka instance and testing with mocked kafksjs
+
+#### Testing against actual Kafka instance
+1. When consumer attempts to subscribe to a topic by calling 
+```
+await consumer.subscribe({ topic });
+```
+it's possible to get error message `There is no leader for this topic-partition as we are in the middle of a leadership election`. So subscription won't establish until Zookeeper finishes election.
+
+2. In different test cases, if consumers subscribe to the same topic and share the same groupId, test cases might interfere one another. (especially Jest runs them in parallel).

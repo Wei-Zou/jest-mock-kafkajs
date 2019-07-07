@@ -7,7 +7,7 @@
     "lint": "eslint .",
     "prettier": "prettier --write '**/*.js'",
     "test": "npm run prettier && npm run lint && npm run setup-local-env && jest",
-    "test-actual": "npm run setup-local-env && jest ./test/kafka-connection-actual.spec.js",
+    "test-actual": "npm run setup-local-env && jest ./test/kafka*-actual.spec.js",
     "test-mocked": "jest ./test/kafka-connection-mock.spec.js",
     "setup-local-env": "docker-compose run --rm start_dependencies"
   },

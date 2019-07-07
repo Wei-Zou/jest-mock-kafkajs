@@ -12,7 +12,6 @@ describe('test KafkaConnection with the actual kafkajs module', () => {
     const value = 'value1';
 
     const onEachMessage = async ({ message }) => {
-      console.log('getting message from Kafka');
       expect(message.key.toString()).toBe(key);
       expect(message.value.toString()).toBe(value);
       await kafkaConnection.disconnect();
