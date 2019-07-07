@@ -91,9 +91,9 @@ describe('test kafkajs with actual Kafka instance', () => {
 
         if (Object.keys(collectedMessages).length + Object.keys(otherMessages).length >= 3) {
           expect({ ...collectedMessages, ...otherMessages }).toEqual({
+            key0: 'value0',
             key1: 'value1',
             key2: 'value2',
-            key3: 'value3',
           });
           await consumer1.disconnect();
           await consumer2.disconnect();
@@ -122,22 +122,22 @@ describe('test kafkajs with actual Kafka instance', () => {
       }),
     });
 
-    const messages = [
-      {
-        key: 'key1',
-        value: 'value1',
-      },
-      {
-        key: 'key2',
-        value: 'value2',
-      },
-      {
-        key: 'key3',
-        value: 'value3',
-      },
-    ];
+    const getSendMessages = (msgNumber) => {
+      return sendMessages({
+        producer,
+        topic,
+        messages: [
+          {
+            key: `key${msgNumber}`,
+            value: `value${msgNumber}`,
+          },
+        ],
+      });
+    };
 
-    await sendMessages({ producer, topic, messages });
+    const promises = [...Array(3).keys()].map(getSendMessages);
+
+    await Promise.all(promises);
   }, 20000);
 
   test('consumers who subscribe to the same topic but in different group get a complete set of messages', async (done) => {
