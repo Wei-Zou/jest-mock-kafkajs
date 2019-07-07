@@ -28,44 +28,40 @@ describe('test kafkajs with actual Kafka instance', () => {
     const kafkaConnection = new Kafka(initConfig);
 
     const producer = kafkaConnection.producer();
+
     const messagesConsumed = {};
-    const consumer = await runConsumer({
-      kafkaConnection,
-      groupId,
-      topic,
-      eachMessage: async ({ message }) => {
-        messagesConsumed[message.key.toString()] = message.value.toString();
+    const eachMessage = async ({ message }) => {
+      messagesConsumed[message.key.toString()] = message.value.toString();
 
-        if (Object.keys(messagesConsumed).length >= 3) {
-          expect(messagesConsumed).toEqual({
-            key1: 'value1',
-            key2: 'value2',
-            key3: 'value3',
-          });
-          await consumer.disconnect();
-          await producer.disconnect();
-          done();
-        }
+      if (Object.keys(messagesConsumed).length >= 3) {
+        expect(messagesConsumed).toEqual({
+          key1: 'value1',
+          key2: 'value2',
+          key3: 'value3',
+        });
+        await consumer.disconnect();
+        await producer.disconnect();
+        done();
+      }
+    };
+
+    const consumer = await runConsumer({ kafkaConnection, groupId, topic, eachMessage });
+
+    const messages = [
+      {
+        key: 'key1',
+        value: 'value1',
       },
-    });
+      {
+        key: 'key2',
+        value: 'value2',
+      },
+      {
+        key: 'key3',
+        value: 'value3',
+      },
+    ];
 
-    await sendMessages({
-      producer,
-      topic,
-      messages: [
-        {
-          key: 'key1',
-          value: 'value1',
-        },
-        {
-          key: 'key2',
-          value: 'value2',
-        },
-        {
-          key: 'key3',
-          value: 'value3',
-        },
-      ],
-    });
+    await sendMessages({ producer, topic, messages });
   }, 5000);
 });
