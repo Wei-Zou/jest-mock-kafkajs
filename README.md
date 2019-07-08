@@ -22,7 +22,7 @@ This project also requires Docker installed locally. To install Docker, [follow 
 npm run setup-local-env
 ```
 
-#### Test actual kafkajs module (with a real running Kafka instance)
+#### Test actual kafkajs module (with a real running Kafka instance in Docker)
 ```
 npm run test-actual
 ```
@@ -37,7 +37,7 @@ npm run test-function-mock
 npm run test-manual-mock
 ```
 
-### Compare testing against actual Kafka instance and testing with mocked kafksjs
+### Compare 3 different testing mechanisms
 
 
 #### Testing against actual Kafka instance
@@ -55,7 +55,7 @@ await consumer.subscribe({ topic });
 ```
 it's possible to get error message `There is no leader for this topic-partition as we are in the middle of a leadership election`. So subscription won't establish until Zookeeper finishes election.
 
-3. In different test cases, if consumers subscribe to the same topic and share the same groupId, test cases might interfere one another. (especially Jest runs them in parallel).
+3. In different test cases, if consumers subscribe to the same topic and share the same groupId, test cases might interfere one another. (especially when Jest runs them in parallel).
 
 4. PR triggered tests/builds require Docker in the env, and takes longer to setup env (needs to download Kafka/Zookeeper images).
 
