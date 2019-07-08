@@ -79,3 +79,8 @@ it's possible to get error message `There is no leader for this topic-partition 
 
 ##### Cons
 1. Need to implement a mock and test against it.
+
+### Notes about `kafkajs` module mocking
+* The implementation of `kafkajs` module mocking is [here](https://github.com/Wei-Zou/jest-mock-kafkajs/blob/master/__mocks__/kafkajs.js). It's a simple `kafkajs` module mock that runs in memory. It supports pruducers' `connect`, `send`, and `disconnect` methods. It also supports consumers' `connect`, `subscribe`, `run`, and `disconnect` methods. It supports multiple consumers in the same group, or in different groups.
+* Batched message consuming has not been implemented.
+* Since it's a local kafkajs implementation, it doesn't implement the concept of `partition` or `broker`.
