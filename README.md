@@ -1,6 +1,6 @@
 # jest-mock-kafkajs
 Mock `kafkajs` using Jest `manual mock`.
-The purpose of this project is to run unit tests against a `kafkajs` module mocked by Jest's `manual mock`. It also compares with running unit tests against the actual `kafkajs` module which requires a Kafka instance running (locally or remotely).
+The purpose of this project is to run unit tests against a `kafkajs` module mocked by Jest's `manual mock`. It compares with running unit tests against the actual `kafkajs` module which requires a Kafka instance running (locally or remotely). It also compares with running unit tests against Jest `function mock` (A.K.A. `stub`).
 
 ### env setup
 
@@ -16,23 +16,66 @@ to install required node modules.
 This project also requires Docker installed locally. To install Docker, [follow the document](https://docs.docker.com/).
 
 ### run test
+
+#### Run Docker to start a local Kafka instance
+```
+npm run setup-local-env
+```
+
 #### Test actual kafkajs module (with a real running Kafka instance)
 ```
 npm run test-actual
 ```
 
+#### Test Jest function mock (stub)
+```
+npm run test-function-mock
+```
+
 #### Test mocked kafkajs module
 ```
-npm run test-mocked
+npm run test-manual-mock
 ```
 
 ### Compare testing against actual Kafka instance and testing with mocked kafksjs
 
+
 #### Testing against actual Kafka instance
-1. When consumer attempts to subscribe to a topic by calling 
+
+##### Pros
+1. Testing with the real environment
+2. Don't need to mock return values for each test.
+
+##### Cons
+1. This usually takes long to complete the tests.
+
+2. When consumer attempts to subscribe to a topic by calling 
 ```
 await consumer.subscribe({ topic });
 ```
 it's possible to get error message `There is no leader for this topic-partition as we are in the middle of a leadership election`. So subscription won't establish until Zookeeper finishes election.
 
-2. In different test cases, if consumers subscribe to the same topic and share the same groupId, test cases might interfere one another. (especially Jest runs them in parallel).
+3. In different test cases, if consumers subscribe to the same topic and share the same groupId, test cases might interfere one another. (especially Jest runs them in parallel).
+
+4. PR triggered tests/builds require Docker in the env, and takes longer to setup env (needs to download Kafka/Zookeeper images).
+
+
+#### Testing with Jest Function (stub)
+
+##### Pros
+1. Fast
+2. Flexible to mock return values for each tests.
+
+##### Cons
+1. Tedious to setup tests
+
+
+#### Testing with Manual Mock
+
+##### Pros
+1. Fast
+2. Don't need to mock return values for each test.
+3. One general mocked implementation can handle multiple situations.
+
+##### Cons
+1. Need to implement a mock and test against it.
