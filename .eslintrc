@@ -10,5 +10,9 @@
   "parserOptions": {
     "ecmaVersion": 9
   },
-  "plugins": ["jest"]
+  "plugins": ["jest"],
+  "rules": {
+    "no-console": 2,
+    "quotes": ["error", "single"]
+  }
 }

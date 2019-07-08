@@ -77,15 +77,7 @@ const getTests = () => () => {
 
     const getEachMessageCb = ({ collectedMessages, otherMessages }) => {
       return async ({ message }) => {
-        console.log(
-          `consuming message key=${message.key.toString()}, value=${message.value.toString()}`
-        );
         collectedMessages[message.key.toString()] = message.value.toString();
-        console.log(
-          `collectedMessages=${JSON.stringify(collectedMessages)}, otherMessages=${JSON.stringify(
-            otherMessages
-          )}`
-        );
 
         if (Object.keys(collectedMessages).length + Object.keys(otherMessages).length >= 3) {
           expect({ ...collectedMessages, ...otherMessages }).toEqual({
