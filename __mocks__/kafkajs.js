@@ -64,8 +64,8 @@ kafkajs.Kafka = class Kafka {
   _sendCb({ topic, messages }) {
     messages.forEach((message) => {
       Object.values(this.topics[topic]).forEach((consumers) => {
-        consumers[0].eachMessage({
-          // only send to the first consumer for now
+        const consumerToGetMessage = Math.floor(Math.random() * consumers.length);
+        consumers[consumerToGetMessage].eachMessage({
           message,
         });
       });
