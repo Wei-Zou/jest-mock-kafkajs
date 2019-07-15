@@ -1,6 +1,6 @@
 {
   "name": "jest-mock-kafkajs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Mock kafkajs using jest manual mock",
   "main": "index.js",
   "scripts": {
