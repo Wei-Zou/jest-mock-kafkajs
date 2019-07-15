@@ -1,5 +1,7 @@
 'use strict';
 
-const { getTests } = require('./kafkajs-common');
+jest.unmock('kafkajs');
+
+const { getTests } = require('./common');
 
 describe('test kafkajs with actual Kafka instance', getTests());

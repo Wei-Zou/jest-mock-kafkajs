@@ -4,7 +4,7 @@ jest.unmock('kafkajs');
 
 const { Kafka } = require('kafkajs');
 
-const { getTest } = require('./kafka-connection-common');
+const { getTest } = require('./common');
 
 describe('test kafkajs with jest function mock (stub)', () => {
   let producerMock;

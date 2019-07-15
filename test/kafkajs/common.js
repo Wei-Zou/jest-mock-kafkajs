@@ -1,7 +1,7 @@
 'use strict';
 
 const { Kafka } = require('kafkajs');
-const { initConfig } = require('./config-test');
+const { initConfig } = require('../config-test');
 
 const sendMessages = async ({ producer, topic, messages }) => {
   await producer.connect();

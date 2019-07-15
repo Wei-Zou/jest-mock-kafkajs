@@ -7,9 +7,9 @@
     "lint": "eslint .",
     "prettier": "prettier --write '**/*.js'",
     "test": "npm run prettier && npm run lint && npm run setup-local-env && jest",
-    "test-actual": "npm run setup-local-env && jest ./test/kafka*-actual.spec.js",
-    "test-function-mock": "jest ./test/kafka*-function-mock.spec.js",
-    "test-manual-mock": "jest ./test/kafka*-manual-mock.spec.js",
+    "test-actual": "npm run setup-local-env && jest ./test/**/actual.spec.js",
+    "test-function-mock": "jest ./test/**/function-mock.spec.js",
+    "test-manual-mocks": "jest ./test/**/manual-mocks.spec.js",
     "setup-local-env": "docker-compose run --rm start_dependencies"
   },
   "repository": {

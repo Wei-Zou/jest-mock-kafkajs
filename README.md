@@ -34,7 +34,7 @@ npm run test-function-mock
 
 #### Test mocked kafkajs module
 ```
-npm run test-manual-mock
+npm run test-manual-mocks
 ```
 
 ### Compare 3 different testing mechanisms

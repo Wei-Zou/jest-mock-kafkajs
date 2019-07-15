@@ -1,7 +1,7 @@
 'use strict';
 
-const KafkaConnection = require('../src/kafka-connection');
-const { initConfig, topic, groupId } = require('./config-test');
+const KafkaConnection = require('../../src/kafka-connection');
+const { initConfig, topic, groupId } = require('../config-test');
 
 const getTest = (checkCb) => async (done) => {
   const kafkaConnection = new KafkaConnection(initConfig);
