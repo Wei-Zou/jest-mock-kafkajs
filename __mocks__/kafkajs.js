@@ -66,7 +66,9 @@ kafkajs.Kafka = class Kafka {
       Object.values(this.topics[topic]).forEach((consumers) => {
         const consumerToGetMessage = Math.floor(Math.random() * consumers.length);
         consumers[consumerToGetMessage].eachMessage({
+          topic,
           message,
+          partition: message.partition,
         });
       });
     });
